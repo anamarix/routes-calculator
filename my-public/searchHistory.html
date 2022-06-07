@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <link rel="stylesheet" href="searchHistory.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,700&display=swap"
+        rel="stylesheet" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="/config.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="routes-container">
+            <div id="buttons-container">
+                <button type="button" id="refresh-button">odśwież</button>
+                <a href="./index.html">Wróć</a>
+            </div>
+            <div id="ul-title">Lista sprawdzanych tras</div>
+            <ul></ul>
+        </div>
+        <div class="app" id="map"> </div>
+    </div>
+
+    <script>
+        const apiKey = config.MY_API_KEY;
+        const platform = new H.service.Platform({
+            apikey: apiKey,
+        });
+        var defaultLayers = platform.createDefaultLayers({ lg: "pl" });
+
+        const map = new H.Map(
+            document.getElementById("map"),
+            defaultLayers.vector.normal.map,
+            {
+                center: { lat: 50, lng: 5 },
+                zoom: 6,
+                padding: { top: 50, left: 50, bottom: 50, right: 50 },
+                pixelRatio: window.devicePixelRatio || 1,
+            }
+        );
+        window.addEventListener("resize", () => map.getViewPort().resize());
+
+        const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        const ui = H.ui.UI.createDefault(map, defaultLayers);
+        const refreshBtn = document.getElementById("refresh-button");
+
+        function refreshMapHandler() {
+            window.location.reload();
+        }
+        refreshBtn.addEventListener("click", refreshMapHandler)
+
+        function addPolylineToMap(map, route, button) {
+            const buttonState = button.classList.contains("active");
+
+            if (!buttonState) {
+                route.line.forEach(el => {
+                    let linestring = H.geo.LineString.fromFlexiblePolyline(el);
+
+                    let polyline = new H.map.Polyline(linestring, {
+                        style: {
+                            lineWidth: 4,
+                            strokeColor: "rgba(0, 128, 255, 0.7)",
+                        },
+                    });
+                    map.addObject(polyline);
+                    map.getViewModel().setLookAtData({
+                        bounds: polyline.getBoundingBox(),
+                    });
+                });
+            } else {
+                map.removeObjects(map.getObjects())
+            }
+            buttonState ? button.classList.remove("active") : button.classList.add("active")
+        }
+
+        async function handleHistorySearch(event) {
+            const routeButton = document.getElementById(event.target.id);
+            const response = await fetch(`/single-route/${event.target.id}`)
+            const data = await response.json();
+            addPolylineToMap(map, data, routeButton)
+
+        }
+        async function getData() {
+            const response = await fetch("/all");
+            const data = await response.json();
+            const list = document.querySelector("ul");
+            list.classList.add("routes-list");
+            data.forEach(route => {
+                const info = document.createElement("li");
+                info.setAttribute("id", route._id)
+                const text = route.createdAt.split("T");
+                info.textContent = `${text[0]}\u00A0\u00A0 ${text[1].slice(0, 8)}`;
+                list.append(info);
+                info.addEventListener("click", handleHistorySearch)
+
+            })
+        }
+        getData()
+    </script>
+</body>
+
+</html>

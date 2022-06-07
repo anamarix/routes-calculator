@@ -1,0 +1,5 @@
+This is a simple route calculator for searching fastest routes between 2-3 places. It assumes that we travel by car. 
+We can chceck the instructions on how to arrive at the destinations if we want.
+The program also chceck the weather for us, both at the starting point and at the destination point at the time of arrival.
+It calculates the total km and the day and hour of arrival.
+I am using HERE Maps for that project.

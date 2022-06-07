@@ -1,0 +1,115 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Lato', sans-serif;
+    color: rgb(114, 48, 114) ;
+
+}
+.container{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction:row;
+}
+#map {
+    padding: 20px;
+    width:50vw;
+    height:80vh;
+}
+li, button, a{
+    cursor: pointer;
+    width: fit-content;
+    padding: .3rem;
+    border-radius: 4px;
+    text-decoration: none;
+   
+}
+
+li:hover, button:hover, a:hover{
+    text-decoration: underline;
+}
+
+button, a {
+    background-color: white;
+    border: none;
+    font-size: 1rem;
+    color: rgb(114, 48, 114) ;
+    font-weight:bold;
+    width: fit-content;
+    padding: 0.8rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+#routes-container{
+    margin:4rem;
+    align-items: center;
+}
+#buttons-container{
+    margin-bottom: 2rem;
+}
+a{
+    margin-left: 3rem;
+}
+ul{
+    text-align: right;
+    max-height: 500px;
+    overflow-y: scroll;
+    
+}
+#ul-title{
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+li{
+    margin-top: .7rem;
+    margin-left: 20px;
+}
+ul li.active{
+    background-color: rgb(146, 240, 146);
+}
+
+@media (max-width:900px) {
+    #routes-container{
+        margin: 0;
+    }
+    .container{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    ul{
+        width: 100vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+  
+    #map{
+        width:100vw;
+        min-height: 400px;
+
+    }
+    a{
+        margin: 0;
+    }
+    li{
+        list-style: none;
+        text-align: left;
+    }
+}
+@media (max-width: 460px) {
+    ul{
+        grid-template-columns: 1fr 1fr;
+        max-height: 30vh;
+        overflow-y: scroll;
+    }
+
+}

@@ -1,0 +1,109 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Lato', sans-serif;
+}
+.app{
+
+    display: flex;
+    margin: 30px auto;
+    width:90vw;
+    height: 90vh;
+}
+
+form{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+    margin-right: 20px;
+}
+
+form label{
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+form input{
+    padding: 3px;
+    border-radius: 5px;
+}
+
+ button{
+    margin-top: 5px;
+    border-radius: 5px;
+    border:none;
+    padding: 3px;
+    width:100%;
+    cursor: pointer;
+}
+
+ button:hover{
+    background-color: green;
+    color: white;
+}
+
+.clicked {
+    background-color: green ;
+    color: white;
+}
+#panel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+ol{
+    height: 80vh;
+    overflow-y:auto;
+    margin-top: 10px;
+}
+
+.summary{
+    margin-bottom: 10px;
+}
+
+#btnsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#btnsContainer div{
+    margin-top: 20px;
+    background-color: white;
+    width: fit-content;
+    padding: 0.8rem;
+    border-radius: 30%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+}
+.no-display{
+    display: none;
+}
+a{
+    background-color: white;
+    width: fit-content;
+    padding: 0.8rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-decoration: none;
+    text-align: center;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+#btnsContainer div:hover{
+    background-color:#aade7c;
+}
+.clicked {
+    background-color:#aade7c!important;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset !important;
+  
+}
