@@ -1,5 +1,7 @@
-This is a simple route calculator for searching fastest routes between 2-3 places. It assumes that we travel by car. 
-We can chceck the instructions on how to arrive at the destinations if we want.
-The program also chceck the weather for us, both at the starting point and at the destination point at the time of arrival.
-It calculates the total km and the day and hour of arrival.
-I am using HERE Maps for that project.
+This is a simple route calculator for fetching routes between point A and B with option for traveling via point C.
+The starting point is either custom location or the geolocation of the user.
+The transport mode is custom: user can pick car, bicycle or pedestrian mode.
+The app also checks the weather forecast both in the starting end ending point( based on the hour of arrival/departure).
+The app gives the user written instructions on how to arrive from point A to point B.
+The history of the searches is saved in database and can be browse at any moment.
+The app has different interface for mobile/desktop.
